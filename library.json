@@ -1,0 +1,24 @@
+{
+    "name": "TimerAndFilters",
+    "version": "1.0.0",
+    "description": "An easy to use timer and some filters",
+    "keywords": "Timer, Average, Signal conditioning, Measurement",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/flyfuri/TimerAndFilter.git"
+    },
+    "authors":
+    [
+      {
+        "name": "Bernhard Fuhrer",
+        "email": ".",
+        "url": "https://github.com/flyfuri",
+        "maintainer": true 
+      }
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/flyfuri",
+    "frameworks": "arduino",
+    "platforms": "*"
+  }
