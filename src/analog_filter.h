@@ -34,6 +34,7 @@ class CFilterAnalogBase {  //base class
     int getAverage(); //just average (rounded integer)
     double getAverageDbl(); //get average in double precicion
     unsigned int getNbrMeas();
+    T getSum(); //get rolling sum
     T calcMinMax (bool return_max = false); //calculate maximum and minimum and return the choosen (default: false = minimum) 
     T getMin(); //minima calculated (must be called after calcMinMax, otherwise potentially outdated)
     T getMax(); //get maxima calculated (must be called after calcMinMax, otherwise potentially outdated)

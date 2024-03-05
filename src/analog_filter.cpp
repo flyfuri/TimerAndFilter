@@ -166,10 +166,6 @@ template <typename T> double CFilterAnalogBase<T>::calcFIRfiltered(double* fIRco
       double outvalue = 0;
       for (int i = 0; i < fIRnbrOfCoeffs; i++){
         outvalue += *loopcoeff * (double)loopvalue->value;
-        /*dbugprint(*loopcoeff);
-        dbugprint(";");
-        dbugprint((double)loopvalue->value);
-        dbugprint(";"); */       
         loopcoeff++;
         if(++loopvalue - m__bf >= m__bf_length){
           loopvalue = m__bf;
@@ -185,6 +181,11 @@ template <typename T> unsigned int CFilterAnalogBase<T>::getNbrMeas(){
     return m__nbr_meas;// * -1;
   return m__nbr_meas;
 }
+
+template <typename T> T CFilterAnalogBase<T>::getSum(){
+  return m__total;
+}
+
 
 template class CFilterAnalogBase<int>;
 template class CFilterAnalogBase<float>;
