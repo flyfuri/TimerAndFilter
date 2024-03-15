@@ -17,6 +17,7 @@ class CFilterAnalogBase {  //base class
     unsigned int m__nbr_meas; //number of measurements added in total to avarage
     bool m__fcycdone; //buffer filled up cycle done
     T m__min, m__max; //highest and lowest value in the buffer 
+    T m__err_default = 0; //return value when error (defualt:0 or set by setErrDefault())
     
     void m_init(unsigned int buffersize);
     void m__add(T &rawvalue, unsigned long &tstampNow); //add one measurement to total and buffer
@@ -28,6 +29,7 @@ class CFilterAnalogBase {  //base class
     CFilterAnalogBase(unsigned int buffersize); 
     virtual ~CFilterAnalogBase();
     //bool initFIR();
+    T setErrDefault(T value);
     int reset(); //reset fiter to 0    
     virtual T measurement(T &measureToAdd) = 0; //adds a measurement to buffer and returns average
     T measurementIfMinChange(T &measureToAdd, T minChange); //add a measurement only when differs minimal to last measurement and return average
