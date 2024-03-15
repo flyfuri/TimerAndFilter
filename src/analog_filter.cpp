@@ -26,11 +26,15 @@
 namespace ANFLTR{
 
 //Base class implementations/////////////////////////////////////////////////////////////////////////
-template <typename T> CFilterAnalogBase<T>::CFilterAnalogBase(){ //Constructor
+template <typename T> CFilterAnalogBase<T>::CFilterAnalogBase() //Constructor
+  : m__err_default(0)
+{ 
     m_init(1000);
 }
 
-template <typename T> CFilterAnalogBase<T>::CFilterAnalogBase(unsigned int buffersize){ //Constructor
+template <typename T> CFilterAnalogBase<T>::CFilterAnalogBase(unsigned int buffersize) //Constructor
+  : m__err_default(0)
+{ 
     m_init(buffersize);
 }
 
@@ -90,7 +94,7 @@ template <typename T> void CFilterAnalogBase<T>::m__remove(){
 
 template <> int CFilterAnalogBase<int>::m__average(){
   if (m__nbr_meas == 0){
-    return 0;
+    return m__err_default;
   }
   else if ((m__total * 1000) / (m__nbr_meas * 1000) % 1000 >= 500 )  //take 3 digits after period to round
     return m__total / m__nbr_meas  + 1;
@@ -100,19 +104,23 @@ template <> int CFilterAnalogBase<int>::m__average(){
 
 template <typename T> T CFilterAnalogBase<T>::m__average(){
   if (m__nbr_meas == 0){
-    return 0;
+    return m__err_default;
   }
   else
   return m__total / m__nbr_meas; 
 }
 
+template <typename T> T CFilterAnalogBase<T>::setErrDefault(T value){
+  return m__err_default = value;
+}
+
 template <typename T> int CFilterAnalogBase<T>::getAverage(){ //just average
-  return m__average();
+  return (int)m__average();
 }
 
 template <typename T> double CFilterAnalogBase<T>::getAverageDbl(){ //just average
   if (m__nbr_meas == 0){
-    return 0;
+    return m__err_default;
   }
   else{
     return (double)m__total / (double)m__nbr_meas;
@@ -173,7 +181,7 @@ template <typename T> double CFilterAnalogBase<T>::calcFIRfiltered(double* fIRco
       }
       return outvalue;
   }
-  return 0;
+  return m__err_default;
 }
 
 template <typename T> unsigned int CFilterAnalogBase<T>::getNbrMeas(){
