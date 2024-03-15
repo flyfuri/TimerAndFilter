@@ -4,13 +4,14 @@
 This library has two functions:
 - Timer: A pair of timer classes which can be used in the way timers are often used in PLC's, either milli- or micro-second based.
 - Filter: A pair of filter classes which can apply some filters over either a specified number of last measures or a specified time, both limitied by the size of its rotating buffer.
- 
 
-### Timer:
+---------------------------------------------------------------------------------
+
+## Timer:
 The two classes work similar with the following methods:
 
 #### evaluate(bool condition)
-If the condition is True it either starts the timer or if it is already started, it reads a new timestamp and calc- ulates how much time has elapsed, returning true if the results exceeds the delay time. If the condition is False,the timer is stopped and False is returned. Next time thecondition is True the time starts from zero again.
+If the condition is True it either starts the timer or if it is already started, it reads a new timestamp and calculates how much time has elapsed, returning true if the results exceeds the delay time. If the condition is False,the timer is stopped and False is returned. Next time the condition is True the time starts from zero again.
 
 #### setTime(bool condition)
 Sets the delay time
@@ -24,12 +25,11 @@ Returns the currently set delay
 #### getElapsedTime()
 Returns the currently elapsed time since start of the timer. 
 
+---------------------------------------------------------------------------------
 
 ### Filter:
 In order to balance the needed precision with the memory footprint and execution speed, the two filter classes can be 
 instantiated either with int, float or double as their basic data type.
-example:  
-
 
 The two classes currently the following methods:
 
@@ -78,13 +78,14 @@ only for class CFilterAnalogOverMeasures:
 set or get over how many measures the rolling average shall be taken.                                        
 
 #### double deriv1overLastNbr(short Nbr=2,double dy=1)
-calculatenfirst derivative over last 2-5 measures f_x = (-2*f[i-3]+9*f[i-2]-18*f[i-1]+11*f[i+0])/(6*1.0*h**1)\ 
+calculatenfirst derivative over last 2-5 measures f_x = (-2*f[i-3]+9*f[i-2]-18*f[i-1]+11*f[i+0])/(6*1.0*h**1)\
 from [https://web.media.mit.edu/~crtaylor/calculator.html](https://web.media.mit.edu/~crtaylor/calculator.html)   |
 
 #### double deriv2overLastNbr(short Nbr=2, double dy=1) 
-calculate second derivaive over last 5 measures f_xx = (-1*f[i-3]+4*f[i-2]-5*f[i-1]+2*f[i+0])/(1*1.0*h**2)\
-from [https://web.media.mit.edu/~crtaylor/calculator.html](https://web.media.mit.edu/~crtaylor/calculator.html)   |
+calculate second derivative over last 2-5 measures f_xx = (-1*f[i-3]+4*f[i-2]-5*f[i-1]+2*f[i+0])/(1*1.0*h**2)\
+from [https://web.media.mit.edu/~crtaylor/calculator.html](https://web.media.mit.edu/~crtaylor/calculator.html)  |
 
+---------------------------------------------------------------------------------
 
 ### Example: 
 [CondorRudderPedal_ESP8622](https://github.com/flyfuri/CondorRudderPedal_ESP8622)
